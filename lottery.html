@@ -1,15 +1,63 @@
 <!DOCTYPE html>
-<html lang="om">
-
+<html>
 <head>
+<title>Aanni Online Lottery</title>
 
-<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 
-<title>ANNI ONLINE LOTTERY</title>
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+}
 
-<link rel="stylesheet" href="style.css">
+.number{
+width:55px;
+height:45px;
+margin:5px;
+border:none;
+border-radius:8px;
+background:#00c853;
+color:white;
+font-size:18px;
+}
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000b;
+align-items:center;
+justify-content:center;
+}
+
+.box{
+background:white;
+color:black;
+padding:25px;
+border-radius:15px;
+width:300px;
+}
+
+.pay{
+background:#1976d2;
+color:white;
+padding:12px;
+margin:8px;
+border-radius:10px;
+}
+
+button{
+cursor:pointer;
+}
+
+</style>
 
 </head>
 
@@ -17,173 +65,89 @@
 <body>
 
 
-<div class="container">
+<h1>🎟 Aanni Online Lottery</h1>
+
+<h3>Number filadhu</h3>
 
 
-<h1>
-🎯 ANNI ONLINE LOTTERY
-</h1>
-
-
-<h2>
-🏆 MARSAA 2 FAA
-</h2>
+<div id="numbers"></div>
 
 
 
-<div class="card">
+<div class="popup" id="popup">
+
+<div class="box">
+
+<h2>Number: <span id="selectedNumber"></span></h2>
 
 
-<h3>
-Lakkoofsa kee filadhu
-</h3>
-
-
-<div id="numbers" class="numbers"></div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- PAYMENT POPUP -->
-
-
-<div id="popup" class="popup">
-
-
-<div class="popup-card">
-
-
-<span class="close" onclick="closePopup()">
-✖
-</span>
-
-
-<h2>
-💳 Kaffaltii
-</h2>
-
-
-<p>
-Lakkoofsa filatte:
-</p>
-
-
-<h1 id="selectedNumber">
-</h1>
-
-
-
-<div class="bank">
-
-🏦 CBE
-
-<br><br>
-
-💳 1000323550828
-
-
-<br><br>
-
-
-<button class="copy" onclick="copyCBE()">
-
+<div class="pay" onclick="copyCBE()">
+CBE: 1000323550828
+<br>
 📋 Copy
-
-</button>
-
-
 </div>
 
 
-
-
-<div class="bank">
-
-🏦 AWASH
-
-<br><br>
-
-💳 013201800201700
-
-
-<br><br>
-
-
-<button class="copy" onclick="copyAWASH()">
-
+<div class="pay" onclick="copyAWASH()">
+AWASH: 013201800201700
+<br>
 📋 Copy
-
-</button>
-
-
 </div>
 
 
-
-
-<p>
-
-👤 Maqaa Account:
 
 <br>
 
-<b>
-ANANE MELKAMU
-</b>
-
-</p>
-
-
-
-
 <button onclick="sendReceipt()">
-
 🧾 Receipt Ergi
-
 </button>
-
 
 
 <p id="fileName"></p>
 
 
+<br>
+
+<button onclick="closePopup()">
+Cufi
+</button>
+
 
 </div>
 
-
 </div>
-
-
-
-
 
 
 <script>
+
+
+const SUPABASE_URL =
+"https://iwoplidjsadmgavegwws.supabase.co";
+
+
+const SUPABASE_KEY =
+"KEY_KEE_AS_GALCHI";
+
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
 
 
 let numbersBox =
 document.getElementById("numbers");
 
 
-
-for(let i=1; i<=100; i++){
-
+for(let i=1;i<=100;i++){
 
 let btn=document.createElement("button");
 
-
 btn.className="number";
 
-
 btn.innerHTML=i;
-
 
 
 btn.onclick=function(){
@@ -193,19 +157,13 @@ openPopup(i);
 };
 
 
-
 numbersBox.appendChild(btn);
-
 
 }
 
 
 
-
-
-
 function openPopup(number){
-
 
 document.getElementById("selectedNumber")
 .innerHTML=number;
@@ -214,110 +172,137 @@ document.getElementById("selectedNumber")
 document.getElementById("popup")
 .style.display="flex";
 
-
 }
-
-
-
 
 
 
 function closePopup(){
 
-
 document.getElementById("popup")
 .style.display="none";
 
-
 }
-
-
-
-
 
 
 
 function copyCBE(){
 
-
 navigator.clipboard.writeText(
 "1000323550828"
 );
 
-
-alert("CBE Copy ta'eera");
-
+alert("CBE copy ta'eera");
 
 }
-
-
-
 
 
 
 function copyAWASH(){
 
-
 navigator.clipboard.writeText(
 "013201800201700"
 );
 
-
-alert("AWASH Copy ta'eera");
-
+alert("Awash copy ta'eera");
 
 }
+  // RECEIPT UPLOAD
 
-
-
-
-
-
-
-function sendReceipt(){
-
+async function sendReceipt(){
 
 let input=document.createElement("input");
 
-
 input.type="file";
-
 input.accept="image/*";
 
 
-
-input.onchange=function(){
+input.onchange = async function(){
 
 
 let file=input.files[0];
 
 
-if(file){
+if(!file){
+return;
+}
 
 
-document.getElementById("fileName")
-.innerHTML =
-"✅ Receipt: " + file.name;
+let number =
+document.getElementById("selectedNumber").innerHTML;
 
+
+
+let fileName =
+Date.now()+"_"+file.name;
+
+
+
+// Storage upload
+
+const {data:uploadData,error:uploadError}=await supabaseClient
+.storage
+.from("receipts")
+.upload(fileName,file);
+
+
+
+if(uploadError){
+
+alert("Receipt upload hin milkoofne");
+
+console.log(uploadError);
+
+return;
 
 }
 
 
 
-};
+// Database save
+
+const {data,error}=await supabaseClient
+.from("receipts")
+.insert([
+
+{
+number:number,
+file:fileName,
+status:"pending"
+}
+
+]);
+
+
+
+if(error){
+
+alert("Database irratti rakkoo jira");
+
+console.log(error);
+
+return;
+
+}
+
+
+
+document.getElementById("fileName").innerHTML =
+"✅ Receipt ergameera";
+
+
+alert("Receipt Admin bira gaheera");
+
+
+}
 
 
 
 input.click();
 
 
-
 }
 
-
-
 </script>
-
 
 
 </body>
