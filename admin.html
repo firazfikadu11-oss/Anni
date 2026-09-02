@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="om">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ANNI Admin</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>🔐 ANNI ADMIN</h1>
+
+
+<div class="card">
+
+
+<h2>Receipt Check</h2>
+
+
+<div class="bank">
+
+👤 User: Demo User
+
+<br><br>
+
+🔢 Lakkoofsa: 25
+
+<br><br>
+
+🧾 Receipt: image.jpg
+
+</div>
+
+
+
+<button onclick="confirmPayment()">
+
+✅ Confirm
+
+</button>
+
+
+<button onclick="rejectPayment()">
+
+❌ Reject
+
+</button>
+
+
+
+</div>
+
+
+
+<br>
+
+
+
+<div class="card">
+
+
+<h2>🏆 Winner</h2>
+
+
+<p id="winner">
+
+Hin filatamne
+
+</p>
+
+
+
+<button onclick="showWinner()">
+
+🎯 Winner Beeksisi
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+function confirmPayment(){
+
+alert(
+"✅ Kaffaltiin mirkanaa'eera"
+);
+
+}
+
+
+
+function rejectPayment(){
+
+alert(
+"❌ Receipt hin fudhatamne"
+);
+
+}
+
+
+
+function showWinner(){
+
+document.getElementById("winner")
+.innerHTML =
+"🎉 Lakkoofsa 25 injifateera";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
