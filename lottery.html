@@ -147,9 +147,43 @@ btn.className="number";
 btn.innerHTML=i;
 
 
-btn.onclick=function(){
+btn.onclick = async function(){
+
+let {data,error} = await supabaseClient
+.from("numbers")
+.select("*")
+.eq("number",i)
+.single();
+
+
+if(error){
+alert("Rakkoo jira");
+return;
+}
+
+
+// yoo namni biraa qabate
+
+if(data.status !== "available"){
+
+alert("Lakkoofsi kun qabameera");
+return;
+
+}
+
+
+// pending godhi
+
+await supabaseClient
+.from("numbers")
+.update({
+status:"pending"
+})
+.eq("id",data.id);
+
 
 openPopup(i);
+
 
 };
 
