@@ -1,0 +1,198 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial, sans-serif;
+    background:#062b2b;
+    color:white;
+    text-align:center;
+}
+
+
+.container{
+    max-width:500px;
+    margin:auto;
+}
+
+
+h1{
+    color:#ffd700;
+}
+
+
+h2{
+    color:white;
+}
+
+
+.card{
+    background:white;
+    color:#062b2b;
+    padding:20px;
+    border-radius:25px;
+    margin-top:20px;
+}
+
+
+/* Lakkoofsa 1-100 */
+
+.numbers{
+
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-top:20px;
+
+}
+
+
+.number{
+
+    background:#062b2b;
+    color:white;
+
+    border:none;
+
+    padding:15px 5px;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.number:hover{
+
+    background:#ffd700;
+
+    color:#062b2b;
+
+}
+
+
+
+/* Button */
+
+button{
+
+    background:#ffd700;
+
+    color:#062b2b;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:25px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* Popup Card */
+
+.popup{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,0.7);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+}
+
+
+
+.popup-card{
+
+    background:white;
+
+    color:#062b2b;
+
+    width:85%;
+
+    max-width:400px;
+
+    padding:25px;
+
+    border-radius:25px;
+
+}
+
+
+
+.close{
+
+    float:right;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+
+
+/* Bank */
+
+.bank{
+
+    background:#062b2b;
+
+    color:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin:15px 0;
+
+}
+
+
+
+/* Promotion image */
+
+.promo{
+
+    width:100%;
+
+    max-width:450px;
+
+    border-radius:20px;
+
+}
