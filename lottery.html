@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="om">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ANNI ONLINE LOTTERY</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+<h1>🎯 ANNI ONLINE LOTTERY</h1>
+
+<h2>🏆 MARSAA 2 FAA</h2>
+
+<div class="card">
+
+<h3>Lakkoofsa kee filadhu</h3>
+
+<div id="numbers" class="numbers"></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- POPUP -->
+
+<div id="popup" class="popup">
+
+<div class="popup-card">
+
+<span class="close" onclick="closePopup()">✖</span>
+
+
+<h2>💳 Kaffaltii</h2>
+
+<p>Lakkoofsa filatte:</p>
+
+<h1 id="selectedNumber"></h1>
+
+
+<div class="bank">
+
+🏦 CBE
+
+<br>
+💳 1000323550828
+
+<br>
+
+<button onclick="copyCBE()">
+📋 Copy
+</button>
+
+</div>
+
+
+<div class="bank">
+
+🏦 AWASH
+
+<br>
+💳 013201800201700
+
+<br>
+
+<button onclick="copyAWASH()">
+📋 Copy
+</button>
+
+</div>
+
+
+<p>
+👤 Maqaa:
+<br>
+<b>ANANE MELKAMU</b>
+</p>
+
+
+<button onclick="sendReceipt()">
+🧾 Receipt Ergi
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+let box=document.getElementById("numbers");
+
+
+for(let i=1;i<=100;i++){
+
+let btn=document.createElement("button");
+
+btn.className="number";
+
+btn.innerHTML=i;
+
+
+btn.onclick=function(){
+
+openPopup(i);
+
+};
+
+
+box.appendChild(btn);
+
+}
+
+
+
+function openPopup(num){
+
+document.getElementById("selectedNumber").innerHTML=num;
+
+document.getElementById("popup").style.display="flex";
+
+}
+
+
+
+function closePopup(){
+
+document.getElementById("popup").style.display="none";
+
+}
+
+
+
+function copyCBE(){
+
+navigator.clipboard.writeText("1000323550828");
+
+alert("CBE copy ta'eera");
+
+}
+
+
+
+function copyAWASH(){
+
+navigator.clipboard.writeText("013201800201700");
+
+alert("AWASH copy ta'eera");
+
+}
+
+
+
+function sendReceipt(){
+
+let input=document.createElement("input");
+
+input.type="file";
+
+input.accept="image/*";
+
+
+input.click();
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
